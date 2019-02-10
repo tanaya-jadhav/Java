@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class ModuleTwo {
 
-    public static String[] readMysteriousNumbers() {
+    public static int[] readMysteriousNumbers() {
         File target = new File("Instagram_Data.txt");
         String[] lines = new String[0];
         try {
@@ -35,9 +35,9 @@ public class ModuleTwo {
             }
         }
         int is_numeric = lines.length - non_num;
-        String[] numeric_list = new String[is_numeric];
+        int[] numeric_list = new int[is_numeric];
         for (int i=non_num, j=0; j<numeric_list.length;i++, j++) {
-            numeric_list[j] = lines[i];
+            numeric_list[j] = Integer.parseInt(lines[i]);
         }
 
         return numeric_list;
@@ -55,28 +55,79 @@ public class ModuleTwo {
     }
 
 
+    public static int countDigits(int num) {
+        int digits = 1;
+        if (num < 10) {
+            digits = 1;
+        }
+        else {
+            while (num >= 10) {
+                num = num / 10;
+                digits = digits + 1;
+            }
+        }
+
+        return digits;
+    }
+
+
+    public static int nthDigitBack(int n, int num) {
+        int digit = 0;
+        int digits = countDigits(num);
+        String number = Integer.toString(num);
+        if (n >= digits) {
+            return digit;
+        } else {
+            int position = digits - n - 1;
+            digit = Character.getNumericValue(number.charAt(position));
+        }
+        return digit;
+    }
+
+
+    public static int nthDigit(int n, int num) {
+        int digit = 0;
+        int digits = countDigits(num);
+        String number = Integer.toString(num);
+        if (n >= digits) {
+            return digit;
+        } else {
+            digit = Character.getNumericValue(number.charAt(n));
+        }
+        return digit;
+    }
+
+
+    public static int[] updateTally(int n, int num, int[] tally) {
+        int digit = nthDigit(n, num);
+        tally[digit] ++;
+        return tally;
+    }
+
+
+    public static int[] nthDigitTally(int n, int[] numbers) {
+        int[] tally = new int[10];
+        for(int x=0; x<numbers.length; x++) {
+            int number = numbers[x];
+            tally = updateTally(n, number, tally);
+        }
+        return tally;
+    }
 
     public static void main(String[] args) {
+
+
+//        int digits = countDigits(1005009);
+//        int digit = nthDigit(0, 5679487);
+//        System.out.println(digit);
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a number: ");
         int n = Integer.parseInt(scanner.nextLine());
 
-        String[] numbers = readMysteriousNumbers();
+        int[] numbers = readMysteriousNumbers();
 
-        int[] tally = new int[10];
-
-        for(int x=0; x<numbers.length; x++) {
-            String number = numbers[x];
-            if(n>=number.length()) {
-            }
-            else {
-                int numberat = Character.getNumericValue(number.charAt(n));
-                tally[numberat] ++;
-
-            }
-
-        }
+        int[] tally = nthDigitTally(n, numbers);
         System.out.println("0s: " + tally[0] + "\n" +"1s: " + tally[1] + "\n" +"2s: " + tally[2] + "\n" +
                 "3s: " + tally[3] + "\n" +"4s: " + tally[4] + "\n" +"5s: " + tally[5] + "\n" +
                 "6s: " + tally[6] + "\n" +"7s: " + tally[7] + "\n" +"8s: " + tally[8] + "\n" +"9s: " + tally[9]);
