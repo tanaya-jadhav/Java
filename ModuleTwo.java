@@ -1,3 +1,7 @@
+//author: Tanaya Jadhav
+//Write a program that can take in data from a text file and tally the digits in the nth position of each number
+//Useful in finding the 0th digit and seeing if the data follows Benford's Law
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
