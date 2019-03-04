@@ -49,7 +49,7 @@ public class ComplexNumber {
     public ComplexNumber divide(ComplexNumber other) {
         ComplexNumber conjugate = other.conjugate();
         ComplexNumber numerator = this.multiply(conjugate);
-        double denominator = other.a*other.a + other.b+other.b;
+        double denominator = other.a*other.a + other.b*other.b;
         double newreal = numerator.a/denominator;
         double newcomplex = numerator.b/denominator;
         return new ComplexNumber(newreal, newcomplex);
