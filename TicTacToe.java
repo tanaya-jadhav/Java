@@ -161,7 +161,8 @@ public class TicTacToe {
                 turn++;
                 firstgame.displayBoard();
                 if (turn == 10) {
-                    restart();
+                    System.out.println("The game ended in a tie. No Winner");
+                    break;
                 }
 
             }
